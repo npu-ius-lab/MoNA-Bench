@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+
+<launch>
+    <node pkg="scale_recovery" name="info_pub" type="info_pub_tracker.py" output="screen">
+        <param name="camera_info_path" value="$(find scale_recovery)/config/camera_info.yaml"/>
+    </node>   
+
+    <node pkg="nodelet" type="nodelet" name="nodelet_manager" args="manager" />
+    <node pkg="nodelet" type="nodelet" name="depth2pcl"
+          args="load depth_image_proc/point_cloud_xyz nodelet_manager">
+      <remap from="camera_info" to="/sync/camera_info"/>
+      <remap from="image_rect" to="/sync/depth"/>
+      <remap from="points" to="/sync/pcl_cam"/>
+    </node>
+
+    <node pkg="scale_recovery" name="ground_seg" type="ground_seg" output="screen"/>
+
+    <node pkg="scale_recovery" name="scale_recovery" type="scale_recovery_tracker.py" output="screen"/>
+
+    <!-- <node pkg="nodelet" type="nodelet" name="nodelet_manager_metric" args="manager" />
+    <node pkg="nodelet" type="nodelet" name="depth2pcl_metric"
+          args="load depth_image_proc/point_cloud_xyz nodelet_manager">
+      <remap from="camera_info" to="/sync/camera_info"/>
+      <remap from="image_rect" to="/sync/depth_metric"/>
+      <remap from="points" to="/sync/pcl_metric"/>
+    </node> -->
+    
+
+</launch>

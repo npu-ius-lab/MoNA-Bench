@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+
+<launch>
+    <!-- Please select algorithms here, while value could be set as "MonoDepth", "MiDaS", or "SC-Depth" -->
+    <arg name="algorithm_name" value="MonoDepth"/>
+    <arg name="data_size" value="500"/>
+    <arg name="data_recording" value="False"/> <!-- If data recording is not required, please set "False" here -->
+    
+    <node pkg="scale_recovery" name="info_pub" type="info_pub_evaluation.py" output="screen">
+        <param name="camera_info_path" value="$(find scale_recovery)/config/camera_info.yaml"/>
+        <param name="algorithm_name" value="$(arg algorithm_name)"/>
+    </node>
+
+    <node pkg="nodelet" type="nodelet" name="nodelet_manager" args="manager" />
+    <node pkg="nodelet" type="nodelet" name="depth2pcl"
+          args="load depth_image_proc/point_cloud_xyz nodelet_manager">
+      <remap from="camera_info" to="/sync/camera_info"/>
+      <remap from="image_rect" to="/sync/depth"/>
+      <remap from="points" to="/sync/pcl_cam"/>
+    </node>
+
+    <node pkg="scale_recovery" name="ground_seg_evaluation" type="ground_seg_evaluation" output="screen">
+        <param name="algorithm_name" value="$(arg algorithm_name)"/>
+    </node>
+
+    <node pkg="scale_recovery" name="scale_recovery_evaluation" type="scale_recovery_evaluation.py" output="screen">
+        <param name="algorithm_name" value="$(arg algorithm_name)"/>
+        <param name="evaluation_path" value="$(find scale_recovery)/evaluation_data"/>
+        <param name="data_size" value="$(arg data_size)"/>
+        <param name="data_recording" value="$(arg data_recording)"/>
+    </node>
+
+    <node pkg="scale_recovery" name="static_object_evaluation" type="static_object_evaluation.py" output="screen">
+        <param name="algorithm_name" value="$(arg algorithm_name)"/>
+        <param name="evaluation_path" value="$(find scale_recovery)/evaluation_data"/>
+        <param name="data_size" value="$(arg data_size)"/>
+        <param name="data_recording" value="$(arg data_recording)"/>
+    </node>
+
+    <node pkg="nodelet" type="nodelet" name="nodelet_manager_metric" args="manager" />
+    <node pkg="nodelet" type="nodelet" name="depth2pcl_metric"
+          args="load depth_image_proc/point_cloud_xyz nodelet_manager">
+      <remap from="camera_info" to="/sync/camera_info"/>
+      <remap from="image_rect" to="/sync/depth_metric"/>
+      <remap from="points" to="/sync/pcl_metric"/>
+    </node>
+
+    <node pkg="nodelet" type="nodelet" name="nodelet_manager_evaluation" args="manager" />
+    <node pkg="nodelet" type="nodelet" name="depth2pcl_evaluation"
+          args="load depth_image_proc/point_cloud_xyz nodelet_manager">
+      <remap from="camera_info" to="/sync/camera_info"/>
+      <remap from="image_rect" to="/sync/depth_box"/>
+      <remap from="points" to="/sync/pcl_box"/>
+    </node>
+    
+</launch>
