@@ -1,0 +1,4 @@
+<launch>
+    <node pkg="mav_controller" name="pid_controller" type="pid_controller.py" output="screen">
+    </node>
+</launch>

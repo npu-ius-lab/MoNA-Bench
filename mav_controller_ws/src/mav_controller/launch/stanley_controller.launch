@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<launch>
+    <!-- Please select algorithms here. For obstacle avoidance, select "fast-planner"; for target tracking, select "fast-tracker"-->
+    <!-- Stanley controller is recommended for target tracking; for obstacle avoidance, PID controller is a better selection-->
+    <arg name="algorithm_name" value="fast-tracker"/>
+
+    <node pkg="mav_controller" name="stanley_controller" type="stanley_node.py" output="screen">
+        <param name="algorithm_name" value="$(arg algorithm_name)"/>
+    </node>
+</launch>
