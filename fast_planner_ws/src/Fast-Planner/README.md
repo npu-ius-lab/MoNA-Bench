@@ -1,6 +1,6 @@
 # fast_planner_ws
 
-The repository is a clone from [Fast-Planner](https://github.com/HKUST-Aerial-Robotics/Fast-Planner), while some modifications have been made to satisfy our requirement. Please follow part 1 [Quick Start](#1-Quick-Start) or part 3 [Setup and Config](#3-setup-and-config) to complete required configuration.
+The repository is a clone from [Fast-Planner](https://github.com/HKUST-Aerial-Robotics/Fast-Planner), while some modifications have been made to satisfy our requirement. Please follow part 1 [Quick Start](#1-quick-start) or part 3 [Setup and Config](#3-setup-and-config) to complete required configuration.
 
 The ```readme``` file is revised based on the original one.
 
@@ -62,7 +62,7 @@ The project has been tested on Ubuntu 16.04(ROS Kinetic) and 18.04(ROS Melodic).
 
 ```
   sudo apt-get install libarmadillo-dev ros-melodic-nlopt
-  cd ${YOUR_WORKSPACE_PATH}/Mono_Drone_Eva/fast_planner_ws
+  cd ~/Mono_Drone_Eva/fast_planner_ws
   catkin_make
 ```
 
