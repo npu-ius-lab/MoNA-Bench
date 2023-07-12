@@ -1,8 +1,0 @@
-prefix=/home/peter/Desktop/rmtt_driver_ws/install_isolated
-
-Name: rmtt_teleop
-Description: Description of rmtt_teleop
-Version: 0.0.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: 

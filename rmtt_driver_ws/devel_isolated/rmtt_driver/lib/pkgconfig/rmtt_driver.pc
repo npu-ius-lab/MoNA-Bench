@@ -1,8 +1,0 @@
-prefix=/home/peter/Desktop/rmtt_driver_ws/devel_isolated/rmtt_driver
-
-Name: rmtt_driver
-Description: Description of rmtt_driver
-Version: 0.0.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: 
