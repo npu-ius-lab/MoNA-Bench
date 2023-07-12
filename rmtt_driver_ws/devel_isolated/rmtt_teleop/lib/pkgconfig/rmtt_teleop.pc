@@ -1,0 +1,8 @@
+prefix=/home/peter/Desktop/rmtt_driver_ws/devel_isolated/rmtt_teleop
+
+Name: rmtt_teleop
+Description: Description of rmtt_teleop
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

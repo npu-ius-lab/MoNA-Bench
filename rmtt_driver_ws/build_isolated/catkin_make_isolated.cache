@@ -1,0 +1,2 @@
+rmtt_driver:rmtt_teleop
+-G Unix Makefiles -DCATKIN_DEVEL_PREFIX=/home/peter/Desktop/rmtt_driver_ws/devel_isolated -DCMAKE_INSTALL_PREFIX=/home/peter/Desktop/rmtt_driver_ws/install_isolated
