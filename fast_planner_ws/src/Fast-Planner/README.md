@@ -1,8 +1,8 @@
 # fast_planner_ws
 
-The repository is a clone from [Fast-Planner](https://github.com/HKUST-Aerial-Robotics/Fast-Planner), while some modifications have been made to satisfy our requirement. Please follow part [3.Setup and Config](https://github.com/npu-ius-lab/Mono_Drone_Eva/tree/main/fast_planner_ws/src/Fast-Planner#3-setup-and-config) to complete required configuration.
+The repository is a clone from [Fast-Planner](https://github.com/HKUST-Aerial-Robotics/Fast-Planner), while some modifications have been made to satisfy our requirement. Please follow part 1 [Quick Start](#1-Quick-Start) or part 3 [Setup and Config](#3-setup-and-config) to complete required configuration.
 
-The original ```readme``` file is shown as follow.
+The ```readme``` file is revised based on the original one.
 
 # Fast-Planner
 
@@ -62,22 +62,18 @@ The project has been tested on Ubuntu 16.04(ROS Kinetic) and 18.04(ROS Melodic).
 
 ```
   sudo apt-get install libarmadillo-dev ros-melodic-nlopt
-  cd ${YOUR_WORKSPACE_PATH}/src
-  git clone https://github.com/HKUST-Aerial-Robotics/Fast-Planner.git
-  cd ../ 
+  cd ${YOUR_WORKSPACE_PATH}/Mono_Drone_Eva/fast_planner_ws
   catkin_make
 ```
 
 You may check the detailed [instruction](#3-setup-and-config) to setup the project. 
-After compilation you can start the visualization by: 
+After compilation you can start the visualization and the program directly by: 
 
 ```
-  source devel/setup.bash && roslaunch plan_manage rviz.launch
+  source devel/setup.bash
+  roslaunch plan_manage kino_replan_tello.launch
 ```
-and start a simulation (run in a new terminals): 
-```
-  source devel/setup.bash && roslaunch plan_manage kino_replan.launch
-```
+
 You will find the random map and the drone in ```Rviz```. You can select goals for the drone to reach using the ```2D Nav Goal``` tool. A sample simulation is showed [here](#demo1).
 
 
@@ -130,9 +126,7 @@ sudo apt-get install libarmadillo-dev ros_${ROS_VERSION_NAME}_nlopt
 After the prerequisites are satisfied, you can clone this repository to your catkin workspace and catkin_make. A new workspace is recommended:
 
 ```
-  cd ${YOUR_WORKSPACE_PATH}/src
-  git clone https://github.com/HKUST-Aerial-Robotics/Fast-Planner.git
-  cd ../
+  cd ${YOUR_WORKSPACE_PATH}/Mono_Drone_Eva/fast_planner_ws
   catkin_make
 ```
 
