@@ -7,7 +7,7 @@ Our previous work has been accepted by [ICAUS2022](https://icaus2022.scimeeting.
 The repository includes source codes of a autonomous obstacle avoidance system proposed in our paper. 
 We have developed an autonomous obstacle avoidance system for the micro-aerial vehicle (MAV) based on monocular depth estimation (MDE).
 
-![pipeline](./figs/pipeline.png)
+![pipeline](./figs/new%20pipeline(cut).png)
 
 The 6-DoF pose estimation and trajectory planning are implemented with [ORB-SLAM2](https://github.com/raulmur/ORB_SLAM2) and [Fast-Planner](https://github.com/HKUST-Aerial-Robotics/Fast-Planner), respectively. Several monocular depth estimation algorithms with distinctive characteristics are applied and evaluated. [The experimental results]() show that both depth accuracy and scale consistency play significant roles in real-world micro-aerial vehicle navigation.
 
@@ -22,7 +22,7 @@ We have tested all the packages on `ROS Melodic` for `Ubuntu 18.04`. The CPU of 
 ## Citation
 If you publish work based on, or using, this code, we would appreciate the citation to the following:
 
-    @inproceedings{yp22icaus,
+    @inproceedings{pan22how,
         author       = {Yongzhou Pan and Jingjing Wang and Fengnan Chen and Zheng Lin and Siyao Zhang and Tao Yang},
         title        = {How Does Monocular Depth Estimation Work for MAV Navigation in The Real World?},
         booktitle    = {Proceedings of the 2022 International Conference on Autonomous Unmanned Systems (ICAUS)},
