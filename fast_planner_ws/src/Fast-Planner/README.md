@@ -1,8 +1,28 @@
 # fast_planner_ws
-
-The repository is a clone from [Fast-Planner](https://github.com/HKUST-Aerial-Robotics/Fast-Planner), while some modifications have been made to satisfy our requirement. Please follow part 1 [Quick Start](#1-quick-start) or part 3 [Setup and Config](#3-setup-and-config) to complete required configuration.
+The repository is a clone from [Fast-Planner](https://github.com/HKUST-Aerial-Robotics/Fast-Planner), while some modifications have been made to satisfy our requirements. Please follow [Quick Start](#quick-start) to complete required configuration.
 
 The ```readme``` file is revised based on the original one.
+
+## Quick Start
+
+The project has been tested on 18.04(ROS Melodic). Please run the following commands to setup:
+
+```
+  sudo apt-get install libarmadillo-dev ros-melodic-nlopt
+  cd ~/Mono_Drone_Eva/fast_planner_ws
+  catkin_make
+``` 
+After compilation you can start the visualization and the program directly by: 
+
+```
+  source devel/setup.bash
+  roslaunch plan_manage kino_replan_tello.launch
+```
+
+You will find the random map and the drone in ```rviz```. You can select goals for the drone to reach using the ```2D Nav Goal``` tool. 
+
+##
+# BELOW IS THE ORIGINAL  ```readme``` FILE 
 
 # Fast-Planner
 
@@ -62,18 +82,22 @@ The project has been tested on Ubuntu 16.04(ROS Kinetic) and 18.04(ROS Melodic).
 
 ```
   sudo apt-get install libarmadillo-dev ros-melodic-nlopt
-  cd ~/Mono_Drone_Eva/fast_planner_ws
+  cd ${YOUR_WORKSPACE_PATH}/src
+  git clone https://github.com/HKUST-Aerial-Robotics/Fast-Planner.git
+  cd ../ 
   catkin_make
 ```
 
 You may check the detailed [instruction](#3-setup-and-config) to setup the project. 
-After compilation you can start the visualization and the program directly by: 
+After compilation you can start the visualization by: 
 
 ```
-  source devel/setup.bash
-  roslaunch plan_manage kino_replan_tello.launch
+  source devel/setup.bash && roslaunch plan_manage rviz.launch
 ```
-
+and start a simulation (run in a new terminals): 
+```
+  source devel/setup.bash && roslaunch plan_manage kino_replan.launch
+```
 You will find the random map and the drone in ```Rviz```. You can select goals for the drone to reach using the ```2D Nav Goal``` tool. A sample simulation is showed [here](#demo1).
 
 
@@ -126,7 +150,9 @@ sudo apt-get install libarmadillo-dev ros_${ROS_VERSION_NAME}_nlopt
 After the prerequisites are satisfied, you can clone this repository to your catkin workspace and catkin_make. A new workspace is recommended:
 
 ```
-  cd ${YOUR_WORKSPACE_PATH}/Mono_Drone_Eva/fast_planner_ws
+  cd ${YOUR_WORKSPACE_PATH}/src
+  git clone https://github.com/HKUST-Aerial-Robotics/Fast-Planner.git
+  cd ../
   catkin_make
 ```
 

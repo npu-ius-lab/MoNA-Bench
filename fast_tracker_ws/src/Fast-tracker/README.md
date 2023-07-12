@@ -1,8 +1,67 @@
 # fast_tracker_ws
 
-The repository is a clone from [Fast-tracker](https://github.com/ZJU-FAST-Lab/Fast-tracker), while some modifications have been made to satisfy our requirement. Please follow part 1 [Prerequisites](#1-prerequisites) to complete required configuration.
+The repository is a clone from [Fast-tracker](https://github.com/ZJU-FAST-Lab/Fast-tracker), while some modifications have been made to satisfy our requirement. Please follow this ```readme``` file to complete required configuration.
 
 The ```readme``` file is revised based on the original one.
+
+## Prerequisites
+The software is developed and tested in Ubuntu 18.04, ROS Melodic. Other version may require minor modification. ROS can be installed here: [ROS Installation](http://wiki.ros.org/ROS/Installation).
+
+[Armadillo](http://arma.sourceforge.net/) and [ompl](https://ompl.kavrakilab.org/) are not required in our programme. If it is necessary to run **uav_simulator** and **car_planner**, please refer to [here](#1-prerequisites).
+
+In **target prediction** part, **OOQP** is used for quadratic programming.
+
+1. Type the following commands to install dependencies.
+
+   ```
+   sudo apt-get install gfortran
+   sudo apt-get install doxygen
+   ```
+
+2. Get a copy of **MA27** from the [HSL Archive](http://www.hsl.rl.ac.uk/download/MA27/1.0.0/a/). Just select the **Personal Licence (allows use without redistribution)**, then fill the information table. 
+
+Then you can download it from an e-mail sent to you. Next, un-zip **MA27**, and follow the *README* in it, install it to your Ubuntu.
+
+**Actually, you only need to type 3 commands in MA27's folder to finish the installation.**
+
+```
+./configure
+make
+sudo make install
+```
+
+3. Manually un-zip packages *OOQP.zip* in the repo and install it to your Ubuntu.
+
+**As above, you can just type 3 commands in OOQP's folder :**
+
+```
+./configure
+make 
+sudo make install
+```
+
+## Build on ROS
+
+You can find ```fast_tracker_ws``` under the repository ```Mono_Drone_Eva```, and please type the following commands to compile it.: 
+
+```
+cd ~/Mono_Drone_Eva/fast_tracker_ws
+catkin_make
+```
+
+## Run the Program
+
+After compilation you can start the visualization and the program directly by: 
+
+```
+  source devel/setup.bash
+  roslaunch plan_manage tracking_model_tello.launch
+```
+
+Then the UAV will start to track the target in its view.
+
+##
+# BELOW IS THE ORIGINAL  ```readme``` FILE 
 
 # Fast-Tracker
 
@@ -81,25 +140,20 @@ sudo make install
 
 ## 2. Build on ROS
 
-You can find ```fast_tracker_ws``` under the repository ```Mono_Drone_Eva``` and only need to compile it.: 
+You can create an empty new workspace and clone this repository to your workspace: 
 
 ```
-cd ~/Mono_Drone_Eva/fast_tracker_ws
+cd ~/your_catkin_ws/src
+git clone https://github.com/ZJU-FAST-Lab/Fast-tracker.git
+cd ..
+```
+Then, compile it.
+
+```
 catkin_make
 ```
 
-## 3. Run the Program
-
-After compilation you can start the visualization and the program directly by: 
-
-```
-  source devel/setup.bash
-  roslaunch plan_manage tracking_model_tello.launch
-```
-
-Then the UAV will start to track the target in its view.
-
-## 4. Run the Simulation
+## 3. Run the Simulation
 
 ```
 source devel/setup.bash
@@ -107,7 +161,7 @@ source devel/setup.bash
 ```
 Then you can follow the gif below to enjoy it.
 ![](figs/3.gif)
- ## 5. Use GPU or Not
+ ## 4. Use GPU or Not
 
  Packages in this repo, **local_sensing** have GPU, CPU two different versions. By default, they are in CPU version for better compatibility. By changing
 
@@ -139,10 +193,10 @@ Don't forget to re-compile the code!
 
 For installation of CUDA, please go to [CUDA ToolKit](https://developer.nvidia.com/cuda-toolkit)
 
-## 6. Licence
+## 5. Licence
 The source code is released under [GPLv3](http://www.gnu.org/licenses/) license.
 
-## 7. Maintaince
+## 6. Maintaince
 
 For any technical issues, please contact Zhichao Han (zhichaohan@zju.edu.cn), Ruibin Zhang (ruibin_zhang@zju.edu.cn), Neng Pan(panneng_zju@zju.edu.cn) or Fei GAO (fgaoaa@zju.edu.cn).
 
