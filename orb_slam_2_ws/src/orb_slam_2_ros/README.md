@@ -1,3 +1,42 @@
+# orb_slam_2_ws
+The repository is a clone from [ORB-SLAM2](https://github.com/raulmur/ORB_SLAM2), while some modifications have been made to satisfy our requirements. Please follow this ```readme``` file to complete required configuration.
+
+The ```readme``` file is revised based on the original one.
+
+## ROS
+This ROS node requires ```catkin_make_isolated``` to build. This package depends on a number of other ROS packages which ship with the default installation of ROS.
+If they are not installed use [rosdep](http://wiki.ros.org/rosdep) to install them. In your catkin folder run
+```
+sudo rosdep init
+rosdep update
+rosdep install --from-paths src --ignore-src -r -y
+```
+to install all dependencies for all packages. If you already initialized rosdep you get a warning which you can ignore.
+
+## Eigen3
+Required by g2o. Download and install instructions can be found [here](http://eigen.tuxfamily.org).
+Otherwise Eigen can be installed as a binary with:
+```
+sudo apt install libeigen3-dev
+```
+**Required at least Eigen 3.1.0**.
+
+## Quick Start
+The project has been tested on 18.04(ROS Melodic). Please run the following commands to setup:
+```
+  cd ~/Mono_Drone_Eva/orb_slam_2_ws
+  catkin_make_isolated
+``` 
+After compilation you can start the program directly by: 
+
+```
+  source devel_isolated/setup.bash
+  roslaunch orb_slam2_ros orb_slam2_rgbd.launch 
+``` 
+
+##
+# BELOW IS THE ORIGINAL  ```readme``` FILE 
+
 # ORB-SLAM2
 **ORB-SLAM2 Authors:** [Raul Mur-Artal](http://webdiis.unizar.es/~raulmur/), [Juan D. Tardos](http://webdiis.unizar.es/~jdtardos/), [J. M. M. Montiel](http://webdiis.unizar.es/~josemari/) and [Dorian Galvez-Lopez](http://doriangalvez.com/) ([DBoW2](https://github.com/dorian3d/DBoW2)).
 The original implementation can be found [here](https://github.com/raulmur/ORB_SLAM2.git).
