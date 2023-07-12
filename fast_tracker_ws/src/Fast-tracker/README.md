@@ -1,6 +1,6 @@
 # fast_tracker_ws
 
-The repository is a clone from [Fast-Planner](https://github.com/HKUST-Aerial-Robotics/Fast-Planner), while some modifications have been made to satisfy our requirement. Please follow part 1 [Prerequisites](#1-prerequisites) to complete required configuration.
+The repository is a clone from [Fast-tracker](https://github.com/ZJU-FAST-Lab/Fast-tracker), while some modifications have been made to satisfy our requirement. Please follow part 1 [Prerequisites](#1-prerequisites) to complete required configuration.
 
 The ```readme``` file is revised based on the original one.
 
