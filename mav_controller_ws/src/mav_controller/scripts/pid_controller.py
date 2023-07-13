@@ -132,7 +132,7 @@ class PID_CONTROLLER:
 
 
 if __name__ == '__main__':
-    rospy.init_node('pos_track', anonymous=True)
+    rospy.init_node('pid_controller', anonymous=True)
     rospy.loginfo('Drone Controller Activated')
     vel_cmd = PID_CONTROLLER()
     try:

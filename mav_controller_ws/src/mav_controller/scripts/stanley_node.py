@@ -199,7 +199,7 @@ class Stanley:
 
 if __name__ == '__main__':
     # Initialize ROS
-    rospy.init_node('pure_pursuit_controller', anonymous=False)
+    rospy.init_node('path_following_controller', anonymous=False)
     rospy.loginfo('Running until shutdown (Ctrl-C).')
     info_pub_node = Stanley()
     try:

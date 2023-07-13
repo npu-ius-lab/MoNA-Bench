@@ -1,6 +1,6 @@
 # rmtt_driver_ws
 
-The repository is a clone from [rmtt_ros](https://github.com/cavayangtao/rmtt_ros), while some modifications have been made to satisfy our requirement. Please follow this ```readme``` file to complete required configuration.
+The repository is a clone from [rmtt_ros](https://github.com/cavayangtao/rmtt_ros), which includes ```rmtt_driver``` and ```rmtt_teleop```. Some modifications have been made to satisfy our requirement. Please follow this ```readme``` file to complete required configuration.
 
 The ```readme``` file is revised based on the original one.
 
