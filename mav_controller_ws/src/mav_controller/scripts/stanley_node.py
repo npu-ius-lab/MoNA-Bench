@@ -10,6 +10,7 @@ import message_filters
 from tf.transformations import euler_from_quaternion
 from geometry_msgs.msg import Twist, PoseStamped
 from quadrotor_msgs.msg import PositionCommand
+from nav_msgs.msg import Odometry
 from visualization_msgs.msg import Marker
 from mav_controller.msg import Bspline
 
@@ -52,7 +53,7 @@ class Stanley:
         
         # ROS Subscriber
         # Pose Subsciber
-        rospy.Subscriber('/orb_slam2_rgbd/pose', PoseStamped, self.vel_cmd_callback, queue_size=10)
+        rospy.Subscriber('/sync/tf_odom', Odometry, self.vel_cmd_callback, queue_size=10)
         
         # Path Subscriber
         if self._method_name == 'fast-planner':
@@ -158,16 +159,19 @@ class Stanley:
 
         return target_idx, error_front_axle
 
-    def vel_cmd_callback(self, pose_msg):
-        x = pose_msg.pose.position.x
-        y = pose_msg.pose.position.y
-        z = pose_msg.pose.position.z
-        quaternion = [pose_msg.pose.orientation.x, pose_msg.pose.orientation.y, pose_msg.pose.orientation.z, pose_msg.pose.orientation.w]
+    def vel_cmd_callback(self, odom_msg):
+        x = odom_msg.pose.pose.position.x
+        y = odom_msg.pose.pose.position.y
+        z = odom_msg.pose.pose.position.z
+        quaternion = [odom_msg.pose.pose.orientation.x, 
+                      odom_msg.pose.pose.orientation.y, 
+                      odom_msg.pose.pose.orientation.z, 
+                      odom_msg.pose.pose.orientation.w]
         theta = euler_from_quaternion(quaternion)[2]
 
         if len(self._path) == 0:
             print('path empty')
-        else:    
+        else:           
             # control quantity
             cx = self._path[:, 0]
             cy = self._path[:, 1]
