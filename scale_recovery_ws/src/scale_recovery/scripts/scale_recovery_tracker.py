@@ -11,9 +11,6 @@ from cv_bridge import CvBridge
 from transformPointcloud import TransPointCloud
 from sensor_msgs.msg import Image, Range, PointCloud2
 
-import time
-import ros_numpy
-
 class ScaleRecovery:
     def __init__(self):
         self._bridge = CvBridge()
@@ -32,9 +29,6 @@ class ScaleRecovery:
         self._filter_shape = 10
         self._trans_mat = TransPointCloud().transform_matrix(self._trans, self._euler)
 
-        # ROS topics
-
-
         # ROS publishers
         self._depth_pub = rospy.Publisher('/sync/depth_metric', Image, queue_size=10)
         
@@ -50,8 +44,6 @@ class ScaleRecovery:
     def relative_height_estimate(self, point_msg_ground):
         # np.array will be returned
         ground_pcl_base = TransPointCloud().trans_pcd_ground(self._trans_mat, point_msg_ground, 'base_link', 0)
-
-        # ground pcl Median filter!!!
 
         # height value
         ground = ground_pcl_base[2, :]
@@ -102,19 +94,6 @@ class ScaleRecovery:
             
             # Publish Metric Depth Map
             self._depth_pub.publish(self._METRIC_DEPTH)
-
-
-    '''    
-        stamp = depth_msg.header.stamp
-        self.PlotDepthMap(stamp, self._RELATIVE_DEPTH)
-
-    def PlotDepthMap(self, stamp, depthmap):
-        test_depth = depthmap[:360,:480]
-        test_depth = self._bridge.cv2_to_imgmsg(test_depth, "32FC1")
-        test_depth.header.stamp = stamp
-        test_depth.header.frame_id = 'camera_link'
-        self._depth_pub_test.publish(test_depth)
-    '''
 
 
 if __name__ == '__main__':

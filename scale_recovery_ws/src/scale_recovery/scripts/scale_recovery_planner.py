@@ -11,9 +11,6 @@ from cv_bridge import CvBridge
 from transformPointcloud import TransPointCloud
 from sensor_msgs.msg import Image, Range, PointCloud2
 
-import time
-import ros_numpy
-
 class ScaleRecovery:
     def __init__(self):
         self._bridge = CvBridge()
@@ -47,8 +44,6 @@ class ScaleRecovery:
         # np.array will be returned
         ground_pcl_base = TransPointCloud().trans_pcd_ground(self._trans_mat, point_msg_ground, 'base_link', 0)
 
-        # ground pcl Median filter!!!
-
         # height value
         ground = ground_pcl_base[2, :]
         relative_height = np.mean(ground)
@@ -63,7 +58,7 @@ class ScaleRecovery:
         # Scale Factor
         metric_height = height_msg.range
         scale_factor =  np.absolute(metric_height/relative_height)
-        # self._SCALE_FACTOR_FILTER = np.append(self._SCALE_FACTOR_FILTER, scale_factor)
+        self._SCALE_FACTOR_FILTER = np.append(self._SCALE_FACTOR_FILTER, scale_factor)
         
         # Median Filter
         if len(self._SCALE_FACTOR_FILTER) < self._filter_shape:
@@ -91,27 +86,13 @@ class ScaleRecovery:
             print(self._SCALE_FACTOR)
 
             # Metric Depth Map
-            # self._METRIC_DEPTH = self._RELATIVE_DEPTH * self._SCALE_FACTOR
-            self._METRIC_DEPTH = self._RELATIVE_DEPTH * 5
+            self._METRIC_DEPTH = self._RELATIVE_DEPTH * self._SCALE_FACTOR
             self._METRIC_DEPTH = self._bridge.cv2_to_imgmsg(self._METRIC_DEPTH, "32FC1")
             self._METRIC_DEPTH.header.stamp = depth_msg.header.stamp
             self._METRIC_DEPTH.header.frame_id = self._cam_link
             
             # Publish Metric Depth Map
             self._depth_pub.publish(self._METRIC_DEPTH)
-
-
-    '''    
-        stamp = depth_msg.header.stamp
-        self.PlotDepthMap(stamp, self._RELATIVE_DEPTH)
-
-    def PlotDepthMap(self, stamp, depthmap):
-        test_depth = depthmap[:360,:480]
-        test_depth = self._bridge.cv2_to_imgmsg(test_depth, "32FC1")
-        test_depth.header.stamp = stamp
-        test_depth.header.frame_id = 'camera_link'
-        self._depth_pub_test.publish(test_depth)
-    '''
 
 
 if __name__ == '__main__':

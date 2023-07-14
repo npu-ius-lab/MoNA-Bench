@@ -13,9 +13,8 @@ from cv_bridge import CvBridge
 from tf import transformations
 from nav_msgs.msg import Odometry
 from sensor_msgs.msg import CameraInfo, Image
-from geometry_msgs.msg import TransformStamped, PoseStamped
 from scale_recovery.msg import AprilTagDetectionArray
-from transformPointcloud import TransPointCloud
+from geometry_msgs.msg import TransformStamped, PoseStamped
 
 # Camera Info
 def parse_yaml(file_name):
@@ -71,13 +70,11 @@ class InfoPub:
         if self._method_name == 'MiDaS':
             # print('Info Pub MiDaS Selected')
             rospy.Subscriber('/midas_topic', Image, self.MidasDepthCallback)
-            # rospy.Subscriber('/midas_topic', Image, self.normalMidasDepthCallback)
         
         # MonoDepth
         if self._method_name == 'MonoDepth':
             # print('Info Pub MonoDepth Selected')
             rospy.Subscriber('/monodepth/depth', Image, self.MonoDepthCallback)
-            # rospy.Subscriber('/monodepth/depth', Image, self.normalMonoDepthCallback)
         
         rospy.Subscriber('/orb_slam2_rgbd/pose', PoseStamped, self.tfOdomCallback)
         rospy.Subscriber('/orb_slam2_rgbd/pose', PoseStamped, self.tfCallback)
@@ -163,48 +160,6 @@ class InfoPub:
         self._depth_pub.publish(idepth) 
         self._info_pub.publish(self._CAM_INFO)
 
-    # Depth info callback
-    def normalMonoDepthCallback(self, depth_msg):
-        # Depth
-        idepth = cv2.resize(self._bridge.imgmsg_to_cv2(depth_msg, "32FC1"), (self._w, self._h))
-        idepth = idepth - np.amin(idepth)
-        idepth /= np.amax(idepth)
-        idepth = idepth + 0.1
-        idepth = self._bridge.cv2_to_imgmsg(idepth, "32FC1")
-        idepth.header.seq = depth_msg.header.seq
-        idepth.header.stamp = depth_msg.header.stamp
-        idepth.header.frame_id = 'camera_link'
-        
-        # Camera Info
-        self._CAM_INFO.header.seq = depth_msg.header.seq
-        self._CAM_INFO.header.stamp = depth_msg.header.stamp
-        self._CAM_INFO.header.frame_id = 'camera_link'
-
-        # Publish Info 
-        self._depth_pub.publish(idepth) 
-        self._info_pub.publish(self._CAM_INFO)
-    
-    # Depth info callback
-    def normalMidasDepthCallback(self, depth_msg):
-        # Depth
-        idepth = cv2.resize(self._bridge.imgmsg_to_cv2(depth_msg, "32FC1"), (self._w, self._h))
-        idepth = idepth - np.amin(idepth)
-        idepth /= np.amax(idepth)
-        idepth = 1.0 - idepth + 0.1
-        idepth = self._bridge.cv2_to_imgmsg(idepth, "32FC1")
-        idepth.header.seq = depth_msg.header.seq
-        idepth.header.stamp = depth_msg.header.stamp
-        idepth.header.frame_id = 'camera_link'
-        
-        # Camera Info
-        self._CAM_INFO.header.seq = depth_msg.header.seq
-        self._CAM_INFO.header.stamp = depth_msg.header.stamp
-        self._CAM_INFO.header.frame_id = 'camera_link'
-
-        # Publish Info 
-        self._depth_pub.publish(idepth) 
-        self._info_pub.publish(self._CAM_INFO)    
-
     # Static Transform between frame 'base_link' and 'camera_link'
     def tfCallback(self, pose_msg):
         self._broadcaster.sendTransform(self._cam2body_trans,
@@ -281,8 +236,6 @@ class InfoPub:
     # Odometry of tag under frame 'map'
     def tagOdomCallback(self, tag_msg):
         try:
-            # Data structure of tag_msg
-            # [tag_x, tag_y, tag_z] = tag_msg.detections.pose.pose.pose.position
             detection = bool(tag_msg.detections)
             if detection == True:
                 odom = Odometry()

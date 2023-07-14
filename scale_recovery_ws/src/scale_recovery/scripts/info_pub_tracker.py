@@ -13,9 +13,8 @@ from cv_bridge import CvBridge
 from tf import transformations
 from nav_msgs.msg import Odometry
 from sensor_msgs.msg import CameraInfo, Image
-from geometry_msgs.msg import TransformStamped, PoseStamped
 from scale_recovery.msg import AprilTagDetectionArray
-from transformPointcloud import TransPointCloud
+from geometry_msgs.msg import TransformStamped, PoseStamped
 
 # Camera Info
 def parse_yaml(file_name):
@@ -59,19 +58,12 @@ class InfoPub:
         self._cam2base_rot = transformations.quaternion_from_euler(np.deg2rad(-90), 0, np.deg2rad(-90))
         self._body2base_trans = (0, 0, 0)
         self._body2base_rot = transformations.quaternion_from_euler(0, np.deg2rad(-self._sensor_incidence), 0)
-        # self._cam_trans = [0, 0, 0]
-        # self._cam_euler = [np.deg2rad(-90), np.deg2rad(90), 0]
-        # self._body_trans = [0, 0, 0]
-        # self._body_euler = [0, np.deg2rad(-10.0), 0]
 
         # ROS subscribers
         self._rgb_sub =  message_filters.Subscriber('/sc_depth_pl/color/image_raw', Image)
         self._depth_sub = message_filters.Subscriber('/sc_depth_pl/depth/image_raw', Image)
         self._data_pack = message_filters.ApproximateTimeSynchronizer([self._rgb_sub, self._depth_sub], 10, 0.1, allow_headerless=True)
         self._data_pack.registerCallback(self.InfoCallback)
-        # rospy.Subscriber('/orb_slam2_rgbd/pose', PoseStamped, self.OdomCallback)
-        # rospy.Subscriber('/orb_slam2_rgbd/pose', PoseStamped, self.PoseCallback)
-        # rospy.Subscriber('/orb_slam2_rgbd/pose', PoseStamped, self.tfPosecallback)
         rospy.Subscriber('/orb_slam2_rgbd/pose', PoseStamped, self.tfOdomCallback)
         rospy.Subscriber('/orb_slam2_rgbd/pose', PoseStamped, self.tfCallback)
         rospy.Subscriber('/orb_slam2_rgbd/pose', PoseStamped, self.camPoseCallback)
@@ -81,14 +73,10 @@ class InfoPub:
         self._info_pub = rospy.Publisher('/sync/camera_info', CameraInfo, queue_size=10)
         self._depth_pub = rospy.Publisher('/sync/depth', Image, queue_size=10)
         self._image_pub = rospy.Publisher('/sync/image', Image, queue_size=10)
-        # self._odom_pub = rospy.Publisher('/sync/odom', Odometry, queue_size=10)
-        # self._pose_pub = rospy.Publisher('/sync/cam_pose', PoseStamped, queue_size=10)
-        # self._pose_tf_pub = rospy.Publisher('/sync/tf_pose', PoseStamped, queue_size=10)
         self._pose_pub = rospy.Publisher('/sync/camera_pose', PoseStamped, queue_size=10)
         self._odom_tf_pub = rospy.Publisher('/sync/tf_odom', Odometry, queue_size=10)
         self._odom_tag_pub = rospy.Publisher('/sync/tag_odom', Odometry, queue_size=10)
         
-
         # ROS listener & broadcaster
         self._listener = tf.TransformListener()
         self._broadcaster = tf.TransformBroadcaster()
@@ -130,21 +118,12 @@ class InfoPub:
                                         rospy.Time.now(),
                                         self._camera_frame,
                                         self._base_link_frame)
-        # self._broadcaster.sendTransform(self._cam2body_trans,
-        #                                 self._cam2body_rot,
-        #                                 pose_msg.header.stamp,
-        #                                 self._camera_frame,
-        #                                 self._base_link_frame)
+
         self._broadcaster.sendTransform(self._body2base_trans,
                                         self._body2base_rot,
                                         rospy.Time.now(),
                                         self._body_frame,
-                                        self._base_link_frame)
-        # self._broadcaster.sendTransform(self._body2base_trans,
-        #                                 self._body2base_rot,
-        #                                 pose_msg.header.stamp,
-        #                                 self._body_frame,
-        #                                 self._base_link_frame)        
+                                        self._base_link_frame)      
     
     # Pose of 'camera_link' under frame 'map'
     def camPoseCallback(self, pose_msg):
@@ -209,8 +188,6 @@ class InfoPub:
     # Odometry of tag under frame 'map'
     def tagOdomCallback(self, tag_msg):
         try:
-            # Data structure of tag_msg
-            # [tag_x, tag_y, tag_z] = tag_msg.detections.pose.pose.pose.position
             detection = bool(tag_msg.detections)
             if detection == True:
                 odom = Odometry()
@@ -235,138 +212,6 @@ class InfoPub:
         
         except (tf.LookupException, tf.ConnectivityException, tf.ExtrapolationException):
             pass  
-
-
-    # def tfPosecallback(self, pose_msg):
-    #     pose = PoseStamped()
-    #     pose.header.stamp = pose_msg.header.stamp
-    #     pose.header.frame_id = 'map'
-        
-    #     (trans, rot) = self._listener.lookupTransform(self._map_frame, self._base_link_frame, pose_msg.header.stamp)
-
-    #     [pose.pose.position.x, 
-    #      pose.pose.position.y, 
-    #      pose.pose.position.z] = trans
-        
-    #     [pose.pose.orientation.x, 
-    #      pose.pose.orientation.y, 
-    #      pose.pose.orientation.z, 
-    #      pose.pose.orientation.w] = rot
-
-    #     self._pose_tf_pub.publish(pose_msg)        
-
-
-    # def OdomCallback(self, pose_msg):
-    #     odom = Odometry()
-    #     odom.header.stamp = pose_msg.header.stamp
-    #     odom.header.frame_id = 'world'
-    #     odom.child_frame_id = 'base_link'
-
-    #     # # -0.03 translational displacement between orb-SLAM2 frame and base_link, while ignored.
-    #     # translation = np.array([pose_msg.pose.position.x, 
-    #     #                         pose_msg.pose.position.y, 
-    #     #                         pose_msg.pose.position.z,
-    #     #                         1])     
-
-    #     # rotation = transformations.quaternion_matrix([pose_msg.pose.orientation.x, 
-    #     #                                               pose_msg.pose.orientation.y, 
-    #     #                                               pose_msg.pose.orientation.z, 
-    #     #                                               pose_msg.pose.orientation.w])
-    #     # pose_orb = rotation
-    #     # pose_orb[:, 3] = translation
-        
-    #     # # -15 degree rotation between world frame and map frame
-    #     # trans_mat = TransPointCloud().transform_matrix(self._body_trans, self._body_euler)
-        
-    #     # # matrix form of pose under body_link
-    #     # pose_body = np.dot(trans_mat, pose_orb)
-        
-    #     # # from matrix to [x,y,z]
-    #     # [odom.pose.pose.position.x, 
-    #     #  odom.pose.pose.position.y, 
-    #     #  odom.pose.pose.position.z] = pose_body[:3, 3]
-        
-    #     # # from matrix to quaternion        
-    #     # quaternion_body = transformations.quaternion_from_matrix(pose_body)
-      
-    #     # [odom.pose.pose.orientation.x, 
-    #     #  odom.pose.pose.orientation.y,
-    #     #  odom.pose.pose.orientation.z,
-    #     #  odom.pose.pose.orientation.w] = quaternion_body[:]
-      
-    #     # odom.pose.covariance = np.diag([1e-2, 1e-2, 1e-2, 1e3, 1e3, 1e-1]).ravel()
-
-    #     odom.pose.pose.position.x = pose_msg.pose.position.x
-    #     odom.pose.pose.position.y = pose_msg.pose.position.y
-    #     odom.pose.pose.position.z = pose_msg.pose.position.z
-    #     odom.pose.pose.orientation.x = pose_msg.pose.orientation.x
-    #     odom.pose.pose.orientation.y = pose_msg.pose.orientation.y
-    #     odom.pose.pose.orientation.z = pose_msg.pose.orientation.z
-    #     odom.pose.pose.orientation.w = pose_msg.pose.orientation.w
-    #     # odom.pose.covariance is a 6*6 matrix
-    #     odom.pose.covariance = np.diag([1e-2, 1e-2, 1e-2, 1e3, 1e3, 1e-1]).ravel()
-
-    #     self._odom_pub.publish(odom)
-    
-
-    # # # Pose under camera_link
-    # def PoseCallback(self, pose_msg):
-    #     pose = PoseStamped()
-    #     pose.header.stamp = pose_msg.header.stamp
-    #     pose.header.frame_id = 'world'
-    #     translation = np.array([pose_msg.pose.position.x, 
-    #                             pose_msg.pose.position.y, 
-    #                             pose_msg.pose.position.z,
-    #                             1])          
-    #     # pose_cam.pose.position.x = pose_msg.pose.position.x
-    #     # pose_cam.pose.position.y = pose_msg.pose.position.y
-    #     # pose_cam.pose.position.z = pose_msg.pose.position.z
-    #     rotation = transformations.quaternion_matrix([pose_msg.pose.orientation.x, 
-    #                                                   pose_msg.pose.orientation.y, 
-    #                                                   pose_msg.pose.orientation.z, 
-    #                                                   pose_msg.pose.orientation.w])    
-    #     # print(rotation)
-    #     pose_orb = rotation
-    #     pose_orb[:, 3] = translation
-    #     # print(pose_orb)
-        
-    #     # rotation between orb-SLAM2 frame and camera_link
-    #     trans_mat = TransPointCloud().transform_matrix(self._cam_trans, self._cam_euler)
-        
-    #     # matrix form of pose under body_link
-    #     pose_cam = np.dot(trans_mat, pose_orb)
-    #     # print(pose_cam)
-        
-    #     # from matrix form to [x,y,z]
-    #     [pose.pose.position.x, 
-    #      pose.pose.position.y, 
-    #      pose.pose.position.z] = pose_cam[:3, 3]
-        
-    #     # from matrix form to quaternion
-    #     quaternion_cam = transformations.quaternion_from_matrix(pose_cam)
-    #     [pose.pose.orientation.x, 
-    #      pose.pose.orientation.y, 
-    #      pose.pose.orientation.z, 
-    #      pose.pose.orientation.w] = quaternion_cam[:]
-    #     # print(pose)
-
-    #     # trans = [0, 0, 0]
-    #     # euler = [np.deg2rad(-90), np.deg2rad(90), 0]
-    #     # trans_mat = TransPointCloud().transform_matrix(trans, euler)
-        
-    #     # # print('POSE',[roll, pitch, yaw])
-    #     # # from orb-SLAM2 frame to camera_link
-    #     # roll = roll + np.deg2rad(-90)
-    #     # pitch = pitch + np.deg2rad(90)
-    #     # # print('POSE',[roll, pitch, yaw])
-    #     # quaternion = transformations.quaternion_from_euler(roll, pitch, yaw)
-    #     # pose_cam.pose.orientation.x = quaternion[0]
-    #     # pose_cam.pose.orientation.y = quaternion[1]
-    #     # pose_cam.pose.orientation.z = quaternion[2]
-    #     # pose_cam.pose.orientation.w = quaternion[3]
-
-    #     self._pose_pub.publish(pose)
-
 
 if __name__ == '__main__':
     # Initialize ROS

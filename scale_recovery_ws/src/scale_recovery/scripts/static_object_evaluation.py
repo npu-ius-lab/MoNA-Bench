@@ -2,20 +2,11 @@
 # -*-coding:utf-8-*-
 
 # ROS
-import tf
-import cv2
-import yaml
 import rospy
-import tf2_ros
 import numpy as np
 import pandas as pd
-import message_filters
 from cv_bridge import CvBridge
-from tf import transformations
-from nav_msgs.msg import Odometry
-from sensor_msgs.msg import CameraInfo, Image
-from geometry_msgs.msg import TransformStamped, PoseStamped
-from transformPointcloud import TransPointCloud
+from sensor_msgs.msg import Image
 
 class StaticEvaluation():
     def __init__(self):
@@ -58,42 +49,12 @@ class StaticEvaluation():
         depth_roi[140:230, 320:370] = depth_6 = depth[140:230, 320:370]
         distance_6 = np.mean(depth_6)
         self._depth_filter_6 = np.append(self._depth_filter_6, distance_6)
-
-        # For MonoDepth
-        # # box 2
-        # depth_roi[80:430, 0:110] = depth_2 = depth[80:430, 0:110]
-        # distance_2 = np.mean(depth_2)
-        # self._depth_filter_2 = np.append(self._depth_filter_2, distance_2)
-
-        # # box 3
-        # depth_roi[130:350, 440:530] = depth_3 = depth[130:350, 440:530]
-        # distance_3 = np.mean(depth_3)
-        # self._depth_filter_3 = np.append(self._depth_filter_3, distance_3)
-
-        # # box 4.5
-        # depth_roi[140:260, 190:250] = depth_4 = depth[140:260, 190:250]
-        # distance_4 = np.mean(depth_4)
-        # self._depth_filter_4 = np.append(self._depth_filter_4, distance_4)
-
-        # # box 6
-        # depth_roi[140:230, 320:360] = depth_6 = depth[140:230, 320:360]
-        # distance_6 = np.mean(depth_6)
-        # self._depth_filter_6 = np.append(self._depth_filter_6, distance_6)
         
         depth_roi = self._bridge.cv2_to_imgmsg(depth_roi, "32FC1")
         depth_roi.header.seq = depth_msg.header.seq
         depth_roi.header.stamp = depth_msg.header.stamp
         depth_roi.header.frame_id = 'camera_link'
         self._target_depth_pub.publish(depth_roi)
-        
-        # print(np.amax(self._depth_filter_2), np.amin(self._depth_filter_2))
-        # print(np.amax(self._depth_filter_3), np.amin(self._depth_filter_3))
-        # print(np.amax(self._depth_filter_4), np.amin(self._depth_filter_4))
-        # print(np.amax(self._depth_filter_6), np.amin(self._depth_filter_6))
-        # print(np.median(self._depth_filter_2))
-        # print(np.median(self._depth_filter_3))
-        # print(np.median(self._depth_filter_4))
-        # print(np.median(self._depth_filter_6))
 
         if len(self._depth_filter_6) == self._filter_max:
             column = ['2m', '3m', '4.5m', '6m']
@@ -128,23 +89,6 @@ class StaticEvaluation():
         # box 6
         depth_roi[140:230, 320:370] = depth_6 = depth[140:230, 320:370]
         distance_6 = np.mean(depth_6)
-
-        # For MonoDepth
-        # # box 2
-        # depth_roi[80:430, 0:110] = depth_2 = depth[80:430, 0:110]
-        # distance_2 = np.mean(depth_2)
-
-        # # box 3
-        # depth_roi[130:350, 440:530] = depth_3 = depth[130:350, 440:530]
-        # distance_3 = np.mean(depth_3)
-
-        # # box 4.5
-        # depth_roi[140:260, 190:250] = depth_4 = depth[140:260, 190:250]
-        # distance_4 = np.mean(depth_4)
-
-        # # box 6
-        # depth_roi[140:230, 320:360] = depth_6 = depth[140:230, 320:360]
-        # distance_6 = np.mean(depth_6)
 
         print('Box 2:'+ str(distance_2) + 'm')
         print('Box 3:' + str(distance_3) + 'm')
