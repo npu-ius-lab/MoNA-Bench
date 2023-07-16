@@ -14,8 +14,8 @@ In **target prediction** part, **OOQP** is used for quadratic programming.
 1. Type the following commands to install dependencies.
 
    ```
-   sudo apt-get install gfortran
-   sudo apt-get install doxygen
+    sudo apt-get install gfortran
+    sudo apt-get install doxygen
    ```
 
 2. Get a copy of **MA27** from the [HSL Archive](http://www.hsl.rl.ac.uk/download/MA27/1.0.0/a/). Just select the **Personal Licence (allows use without redistribution)**, then fill the information table. 
@@ -25,9 +25,9 @@ Then you can download it from an e-mail sent to you. Next, un-zip **MA27**, and 
 **Actually, you only need to type 3 commands in MA27's folder to finish the installation.**
 
 ```
-./configure
-make
-sudo make install
+  ./configure
+  make
+  sudo make install
 ```
 
 3. Manually un-zip packages *OOQP.zip* in the repo and install it to your Ubuntu.
@@ -35,9 +35,9 @@ sudo make install
 **As above, you can just type 3 commands in OOQP's folder :**
 
 ```
-./configure
-make 
-sudo make install
+  ./configure
+  make 
+  sudo make install
 ```
 
 ## Build on ROS
@@ -45,8 +45,8 @@ sudo make install
 You can find ```fast_tracker_ws``` under the repository ```Mono_Drone_Eva```, and please type the following commands to compile it.: 
 
 ```
-cd ~/Mono_Drone_Eva/fast_tracker_ws
-catkin_make
+  cd ~/Mono_Drone_Eva/fast_tracker_ws
+  catkin_make
 ```
 
 ## Run the Program

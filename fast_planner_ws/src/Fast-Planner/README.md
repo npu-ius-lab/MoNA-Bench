@@ -15,6 +15,7 @@ The project has been tested on 18.04(ROS Melodic). Please run the following comm
 After compilation you can start the visualization and the program directly by: 
 
 ```
+  cd ~/Mono_Drone_Eva/fast_planner_ws
   source devel/setup.bash
   roslaunch plan_manage kino_replan_tello.launch
 ```

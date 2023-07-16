@@ -13,7 +13,7 @@ catkin_make_isolated
 
 ## Run the Program
 
-After compilation you can start the program. For ```rmtt_driver```, please run
+After compilation you can start the program. Please run
 ```
   cd ~/Mono_Drone_Eva/target_detection_ws
   source devel_isolated/setup.bash

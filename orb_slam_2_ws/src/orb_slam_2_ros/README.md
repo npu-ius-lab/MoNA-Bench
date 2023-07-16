@@ -30,6 +30,7 @@ The project has been tested on 18.04(ROS Melodic). Please run the following comm
 After compilation you can start the program directly by: 
 
 ```
+  cd ~/Mono_Drone_Eva/orb_slam_2_ws
   source devel_isolated/setup.bash
   roslaunch orb_slam2_ros orb_slam2_rgbd.launch 
 ``` 
