@@ -41,21 +41,23 @@ Our system enables the recovery of estimated dense depth maps to metric scale. T
 
 Six frames are included in our system, and we utilzied TF tree to manage all the coordinates. The definition relationships between frames are shown as follow.
 
-<center>
-<img src="./figs/figs/tf_tree.png" width="60%">
-</center>
+<p align="center">
+    <img src="figs/figs/tf_tree.png" alt="tf_tree" width="60%">
+</p>
 
 We applied and evaluated several MDE algorithms in our work. The estimated depth map was transform into point cloud by camera intrinsics, and the ground was segmented by RANSAC algorithm. Distances between the UAV and detected obdtacles are also recorded to evaluate each algorithm estimation performance.
 
-<center>
-<img src="./figs/new%20ground%20segmentation.png" width="80%">
-</center>
+<p align="center">
+    <img src="figs/new%20ground%20segmentation.png" alt="ground segmentation" width="80%">
+</p>
+
 
 According to our previous experimental results, we figured it out that both depth accuracy and scale consistency play significant roles in real-world MAV navigation, and ***SC-DepthV2*** performed best in the three selected algorithms due to its ***scale-consistency***.
 
- <center>
-<img src="./figs/new%20obstacle%20avoidance.png" width="80%">
-</center>
+<p align="center">
+    <img src="/figs/new%20obstacle%20avoidance.png" alt="obstacle avoidance" width="80%">
+</p>
+
 
 ## Experimental Configuration
 We have tested all the packages in `ROS Melodic` on `Ubuntu 18.04`. The CPU of the laptop is *`Intel i7-10875H`* and the GPU is *`NVIDIA GeForce RTX 2070 Super Max-Q`*.  The GPU driver version is `450.51.06` and the CUDA version is `11.0`. We recommend you to manage the MDE workspaces with Anaconda Virtual Enviroment.
