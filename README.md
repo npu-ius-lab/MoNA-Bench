@@ -1,4 +1,4 @@
-# Mono_Drone_Eva
+# MoNA Bench
 A UAV-based evaluation system for monocular depth estimation, which supports autonomous obstacle avoidance and target tracking.
 
 Our previous work has been accepted by [ICAUS2022](https://icaus2022.scimeeting.cn/cn/web/index/12954_990754__), and the source codes can be found [here](https://github.com/YongzhouPan/Mono-Navigation). Please check the experimental video [here](https://space.bilibili.com/1622930364).
