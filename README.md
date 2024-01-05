@@ -55,7 +55,7 @@ We applied and evaluated several MDE algorithms in our work. The estimated depth
 According to our previous experimental results, we figured it out that both depth accuracy and scale consistency play significant roles in real-world MAV navigation, and ***SC-DepthV2*** performed best in the three selected algorithms due to its ***scale-consistency***.
 
 <p align="center">
-    <img src="/figs/new%20obstacle%20avoidance.png" alt="obstacle avoidance" width="80%">
+    <img src="./figs/new%20obstacle%20avoidance.png" alt="obstacle avoidance" width="80%">
 </p>
 
 

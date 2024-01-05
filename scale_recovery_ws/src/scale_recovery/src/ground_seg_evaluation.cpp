@@ -106,9 +106,6 @@ void PointCloudProcessor::cloudCallback(const sensor_msgs::PointCloud2::ConstPtr
   dsp_pcl.header.frame_id = "camera_link";
   this->dsp_pub_.publish(dsp_pcl);
   
-  /* ********************************************
-  *********** Single Plane Segment ************
-  ******************************************** */
   // Perform plane segmentation using RANSAC
   pcl::ModelCoefficients::Ptr coefficients(new pcl::ModelCoefficients);
   pcl::PointIndices::Ptr inliers(new pcl::PointIndices);
@@ -129,10 +126,6 @@ void PointCloudProcessor::cloudCallback(const sensor_msgs::PointCloud2::ConstPtr
   seg_.setInputCloud(downsampled);
   seg_.segment(*inliers, *coefficients);
  
-  // std::cout << *coefficients << std::endl;
-  // std::cout << abs(coefficients->values[1]) << std::endl;
-
-  // 通过平面参数判断是否为地面，若不为地面，则保留最近一帧地面的平面参数，以获取平面附近点
   if (abs(coefficients->values[1]) > 0.90) {
     this->plane_coeff[0] = coefficients->values[0];
     this->plane_coeff[1] = coefficients->values[1];
@@ -180,10 +173,6 @@ void PointCloudProcessor::cloudCallback(const sensor_msgs::PointCloud2::ConstPtr
   output.header.frame_id = "camera_link";
   // output.header.stamp = input.header.stamp;
   this->pub_.publish(output);
-
-  /* **********************************************
-  *********** Single Plane Segment End ************
-  ********************************************** */
 
 }
 
