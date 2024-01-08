@@ -1,5 +1,5 @@
 # MoNA Bench
-A benchmark for monocular depth estimation in unmanned aircraft autonomous navigation, supporting autonomous obstacle avoidance and target tracking. The experiment videos are available [here](https://space.bilibili.com/1622930364/channel/seriesdetail?sid=3890110).
+A benchmark for monocular depth estimation in unmanned aircraft autonomous navigation, supporting obstacle avoidance and safe target tracking. The experiment videos are available [here](https://space.bilibili.com/1622930364/channel/seriesdetail?sid=3890110).
 
 Our previous work has been approved for presentation at [ICAUS2022](https://icaus2022.scimeeting.cn/cn/web/index/12954_990754__). The source code can be found [here](https://github.com/YongzhouPan/Mono-Navigation), and the corresponding paper is available [here](https://link.springer.com/chapter/10.1007/978-981-99-0479-2_347).
 
