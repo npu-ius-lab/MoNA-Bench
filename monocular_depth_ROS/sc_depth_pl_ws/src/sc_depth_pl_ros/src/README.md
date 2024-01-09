@@ -1,3 +1,39 @@
+# SC-DepthV2 ROS
+The repository is a clone from [SC_Depth](https://github.com/JiawangBian/sc_depth_pl), while some modifications have been made to satisfy our requirement. Please follow this ```readme``` file to complete required configuration.
+
+## Prerequisites
+We recommend to construct an Anaconda virtual environment to manage the required packages.
+
+
+- Create a virtual environment
+
+```bash
+conda create -n sc_depth_ros python=3.8
+```
+
+- Install packages
+
+```bash
+conda activate sc_depth_env
+conda install pytorch torchvision pytorch-cuda=11.7 -c pytorch -c nvidia
+pip install -r requirements.txt 
+```
+
+- Download pre-processed standard datasets:
+
+[**[nyu]**](https://1drv.ms/u/s!AiV6XqkxJHE2mUUA5hElvhZXnqOn?e=51SIE1)
+
+Configure ROS to be able to use with Python3 and cv_bridge following this [link](https://medium.com/@beta_b0t/how-to-setup-ros-with-python-3-44a69ca36674).
+
+## Launch
+
+```bash
+roslaunch sc_depth_pl_ros sc_depth_ros.launch
+```
+
+##
+# BELOW IS THE ORIGINAL  ```readme``` FILE 
+
 # SC_Depth_pl:
 
 This is a pytorch lightning implementation of **SC-Depth** (V1, V2) for **self-supervised learning of monocular depth from video**.

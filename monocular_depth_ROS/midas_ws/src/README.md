@@ -1,4 +1,11 @@
-﻿# MiDaS for ROS1 by using LibTorch in C++
+﻿# MiDaS ROS
+The repository is a clone from [MiDaS](https://github.com/isl-org/MiDaS/tree/master/ros), while some modifications have been made to satisfy our requirement. Please follow the original ```readme``` file to complete required configuration.
+
+
+##
+# BELOW IS THE ORIGINAL  ```readme``` FILE 
+
+# MiDaS for ROS1 by using LibTorch in C++
 
 ### Requirements
 

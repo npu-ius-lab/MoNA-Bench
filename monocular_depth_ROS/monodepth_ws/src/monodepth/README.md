@@ -1,3 +1,45 @@
+# Mono Depth ROS
+The repository is a clone from [Mono Depth ROS](https://github.com/tentone/monodepth), while some modifications have been made to satisfy our requirement. Please follow this ```readme``` file to complete required configuration.
+
+## Prerequisites
+We recommend to construct an Anaconda virtual environment to manage the required packages.
+
+- Install ROS dependencies
+
+```bash
+apt-get install python python-pip curl
+pip install rosdep rospkg rosinstall_generator rosinstall wstool vcstools catkin_tools catkin_pkg
+```
+
+- Create a virtual environment
+
+```bash
+conda create -n monodepth_ros python=2.7
+```
+
+- Install packages
+
+```bash
+conda activate monodepth_ros
+pip install tensorflow keras pillow matplotlib scikit-learn scikit-image opencv-python pydot GraphViz tk  
+```
+
+- Download pretrained models
+
+```bash
+cd monodepth_ws/src/monodepth/models
+curl –o nyu.h5 https://s3-eu-west-1.amazonaws.com/densedepth/nyu.h5
+```
+
+## Launch
+
+```bash
+roslaunch monodepth monodepth.launch
+```
+
+##
+# BELOW IS THE ORIGINAL  ```readme``` FILE 
+
 ## Mono Depth ROS
  - ROS node used to estimated depth from monocular RGB data.
  - Should be used with Python 2.X and ROS
