@@ -3,7 +3,7 @@ A benchmark for monocular depth estimation in unmanned aircraft autonomous navig
 
 Our previous work received the best poster award at [ICAUS2022](https://link.springer.com/chapter/10.1007/978-981-99-0479-2_347). The old version of source code can be found [here](https://github.com/YongzhouPan/Mono-Navigation).
 
-## Table of Contents
+<!-- ## Table of Contents
 * __[Introduction](#introduction)__
 * __[Experimental Configuration](#experimental-configuration)__
 * __[Usage](#usage)__
@@ -21,7 +21,7 @@ Our previous work received the best poster award at [ICAUS2022](https://link.spr
     * [PID Controller](#pid-controller)
     * [Path Following Controller](#path-following-controller)
 * __[Citation](#citation)__
-* __[Update](#update)__
+* __[Update](#update)__ -->
 
 ## Introduction
 The repository includes source codes of the ***autonomous obstacle avoidance / target tracking system*** proposed in our paper. 
