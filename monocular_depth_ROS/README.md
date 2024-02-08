@@ -32,7 +32,7 @@ catkin build
 
 Put files in sc_depth_pl_ws/src/sc_depth_pl_ros into sc_depth_pl_ws/install/share/sc_depth_pl_ros.
 
-Put [nyu_scv2_model](https://onedrive.live.com/?id=36712431A95E7A25!3266&resid=36712431A95E7A25!3266&authkey=!AN9KaLjLL78kdKY&cid=36712431a95e7a25) file into sc_depth_pl_ws/install/share/sc_depth_pl_ros/src/ckpts, and run:
+Put the model in [nyu_scv2](https://onedrive.live.com/?id=36712431A95E7A25!3266&resid=36712431A95E7A25!3266&authkey=!AN9KaLjLL78kdKY&cid=36712431a95e7a25) file into sc_depth_pl_ws/install/share/sc_depth_pl_ros/src/ckpts, and run:
 
 ```
 source install/setup.bash --extend

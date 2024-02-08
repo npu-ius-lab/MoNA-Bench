@@ -218,4 +218,4 @@ For any technical problems, please raise issues or contact Yongzhou Pan (panyong
 <!-- or Tao Yang. -->
 
 ## License
-The source code is released under [GPLv3](http://www.gnu.org/licenses/) license.
+The test methods come with their own license, and the rest follow the [GPLv3](http://www.gnu.org/licenses/) license.
