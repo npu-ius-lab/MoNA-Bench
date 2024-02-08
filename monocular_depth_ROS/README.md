@@ -3,7 +3,7 @@ The folder is a collection of 4 ROS packages for monocular depth estimation, inc
 
  <!-- You can click the specific package to access its homepage. The performance of these algorithms was evaluated in our paper, and we are glad to show our great respect to the packages developers for their contribution to our open-source community. -->
 
-**It should be noticed that the 4 packages were modified to satisfy our experimental requirements.** For more details, please check [monodepth_ros](https://github.com/YongzhouPan/monodepth_ros), [MiDaS_ros](https://github.com/YongzhouPan/MiDaS_ros), [packnet_sfm_ros](https://github.com/YongzhouPan/packnet_sfm_ros), [SC_Depth_pl_ros](https://github.com/YongzhouPan/sc_depth_pl_ros), respectively. 
+**It should be noticed that the 4 packages were modified to satisfy our experimental requirements.** For more details, please check [monodepth_ros](https://github.com/YongzhouPan/monodepth_ros), [MiDaS_ros](https://github.com/YongzhouPan/MiDaS_ros), [packnet_sfm_ros](https://github.com/YongzhouPan/packnet_sfm_ros), and [SC_Depth_pl_ros](https://github.com/YongzhouPan/sc_depth_pl_ros), respectively. 
 
 <!-- ## Experimental Configuration
 We have tested all the packages on `Ubuntu 18.04/ROS Melodic`. -->
