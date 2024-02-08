@@ -51,16 +51,15 @@ We applied and evaluated several MDE algorithms in our work. The estimated depth
     <img src="figs/new%20ground%20segmentation.png" alt="ground segmentation" width="80%">
 </p>
 
-
 According to our previous experimental results, we figured it out that both depth accuracy and scale consistency play significant roles in real-world MAV navigation, and ***SC-DepthV2*** performed best in the three selected algorithms due to its ***scale-consistency***.
 
 <p align="center">
     <img src="./figs/new%20obstacle%20avoidance.png" alt="obstacle avoidance" width="80%">
 </p>
 
-
 ## Experimental Configuration
-We have tested all the packages in `ROS Melodic` on `Ubuntu 18.04`. The CPU of the laptop is *`Intel i7-10875H`* and the GPU is *`NVIDIA GeForce RTX 2070 Super Max-Q`*.  The GPU driver version is `450.51.06` and the CUDA version is `11.0`. We recommend you to manage the MDE workspaces with Anaconda Virtual Enviroment.
+We have tested all the packages in `ROS Melodic` on `Ubuntu 18.04`. We recommend to manage the MDE workspaces with Anaconda Virtual Enviroment.
+<!-- The CPU of the laptop is *`Intel i7-10875H`* and the GPU is *`NVIDIA GeForce RTX 2070 Super Max-Q`*.  The GPU driver version is `450.51.06` and the CUDA version is `11.0`. We recommend you to manage the MDE workspaces with Anaconda Virtual Enviroment. -->
 
 ## Usage
 Our system supportes tasks like autonomous obstacle avoidance and target tracking. Following content presents the running workflow of our system.
@@ -125,15 +124,15 @@ This package calculates metric scale factor from estimated depth map and metric 
   source devel/setup.bash
   roslaunch scale_recovery scale_recovery_tracker.launch 
 ```
-It should be noted that [Fast-tracker](https://github.com/npu-ius-lab/Mono_Drone_Eva/tree/main/fast_tracker_ws/src/Fast-tracker) is required to work cooperatively with this function. Please launch [Fast-tracker](https://github.com/npu-ius-lab/Mono_Drone_Eva/tree/main/fast_tracker_ws/src/Fast-tracker) after activating this node.
+<!-- It should be noted that [Fast-tracker](https://github.com/npu-ius-lab/Mono_Drone_Eva/tree/main/fast_tracker_ws/src/Fast-tracker) is required to work cooperatively with this function. Please launch [Fast-tracker](https://github.com/npu-ius-lab/Mono_Drone_Eva/tree/main/fast_tracker_ws/src/Fast-tracker) after activating this node. -->
 
-For *autonomous obstacle avoidance*, please run :
+<!-- For *autonomous obstacle avoidance*, please run :
 ```
   cd ~/Mono_Drone_Eva/scale_recovery_ws
   source devel/setup.bash
   roslaunch scale_recovery scale_recovery_planner.launch 
 ```
-Similarly, [Fast-Planner](https://github.com/npu-ius-lab/Mono_Drone_Eva/tree/main/fast_planner_ws/src/Fast-Planner) is required to work cooperatively with this function. Please launch [Fast-Planner](https://github.com/npu-ius-lab/Mono_Drone_Eva/tree/main/fast_planner_ws/src/Fast-Planner) after activating this node.
+Similarly, [Fast-Planner](https://github.com/npu-ius-lab/Mono_Drone_Eva/tree/main/fast_planner_ws/src/Fast-Planner) is required to work cooperatively with this function. Please launch [Fast-Planner](https://github.com/npu-ius-lab/Mono_Drone_Eva/tree/main/fast_planner_ws/src/Fast-Planner) after activating this node. -->
 
 Some other functions (such as MDE performance evaluation) are also provided in this package. For more details, please refer to [```scale_recovery_ws```](https://github.com/npu-ius-lab/Mono_Drone_Eva/tree/main/scale_recovery_ws/src/scale_recovery).
 
@@ -187,7 +186,7 @@ to visualize grid map and start tracking. Please check [```fast_tracker_ws```](h
 Two controller are included in [mav_controller_ws](): a PID controller and a path following controller. 
 
 ### PID Controller
-The PID controller is recommended to use (and only can be used) in autonomous obstacle avoidance with [Fast-Planner](https://github.com/npu-ius-lab/Mono_Drone_Eva/tree/main/fast_tracker_ws/src/Fast-tracker). For ```pid_controller```, please run :
+The PID controller is recommended to use in autonomous obstacle avoidance with [Fast-Planner](https://github.com/npu-ius-lab/Mono_Drone_Eva/tree/main/fast_tracker_ws/src/Fast-tracker). For ```pid_controller```, please run :
 ```
   cd ~/Mono_Drone_Eva/mav_controller_ws
   source devel/setup.bash
@@ -215,11 +214,8 @@ If you publish work based on, or using, this code, we would appreciate the citat
         }  
 
 ## Maintainers
-For any technical issues, please contact Yongzhou Pan (panyongzhou@mail.nwpu.edu.cn).
+For any technical problems, please raise issues or contact Yongzhou Pan (panyongzhou@mail.nwpu.edu.cn).
 <!-- or Tao Yang. -->
 
 ## License
 The source code is released under [GPLv3](http://www.gnu.org/licenses/) license.
-
-## Update
-The `README` is an initial version and we will improve it with more details in the coming days.

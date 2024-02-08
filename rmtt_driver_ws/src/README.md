@@ -24,7 +24,7 @@ cd ~/Mono_Drone_Eva/rmtt_driver_ws
 catkin_make_isolated
 ```
 
-## Run the Program
+<!-- ## Run the Program
 
 After compilation you can start the program. For ```rmtt_driver```, please run
 ```
@@ -50,7 +50,7 @@ or you can control the drone via joys:
   conda activate py38
   source devel_isolated/setup.bash
   roslaunch rmtt_teleop rmtt_teleop_joy.launch 
-```
+``` -->
 
 ##
 # BELOW IS THE ORIGINAL  ```readme``` FILE 

@@ -8,7 +8,7 @@ from tf import transformations
 import std_msgs.msg
 from sensor_msgs.msg import PointField
 import sensor_msgs.point_cloud2 as pc2
-import open3d as o3d
+# import open3d as o3d
 
 class TransPointCloud:
     def __init__(self):
