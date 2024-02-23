@@ -216,13 +216,15 @@ If you publish work based on, or using, this code, we would appreciate the citat
 }
 
 @inproceedings{pan2022does,
-  title={How Does Monocular Depth Estimation Work for MAV Navigation in the Real World?},
-  author={Pan, Yongzhou and Wang, Jingjing and Chen, Fengnan and Lin, Zheng and Zhang, Siyao and Yang, Tao},
-  booktitle={International Conference on Autonomous Unmanned Systems},
-  pages={3763--3771},
-  year={2022},
-  organization={Springer}
-}
+        title={How Does Monocular Depth Estimation Work for MAV Navigation in the Real World?},
+        author={Pan, Yongzhou and Wang, Jingjing and Chen, Fengnan and Lin, Zheng and Zhang, Siyao and Yang, Tao},
+        booktitle={International Conference on Autonomous Unmanned Systems},
+        pages={3763--3771},
+        year={2022},
+        organization={Springer}
+        }
+
+      
 
 ## Maintainers
 For any technical problems, please raise issues or contact Yongzhou Pan (panyongzhou@mail.nwpu.edu.cn).
