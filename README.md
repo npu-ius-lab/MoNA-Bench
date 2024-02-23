@@ -204,14 +204,25 @@ The path following controller is a appropriate choice for target tracking with [
 ## Citation
 If you publish work based on, or using, this code, we would appreciate the citation to the following:
 
-    @inproceedings{pan2022does,
-        title={How Does Monocular Depth Estimation Work for MAV Navigation in the Real World?},
-        author={Pan, Yongzhou and Wang, Jingjing and Chen, Fengnan and Lin, Zheng and Zhang, Siyao and Yang, Tao},
-        booktitle={International Conference on Autonomous Unmanned Systems},
-        pages={3763--3771},
-        year={2022},
-        organization={Springer}
-        }  
+@article{pan2024mona,
+  title={MoNA Bench: A Benchmark for Monocular Depth Estimation in Navigation of Autonomous Unmanned Aircraft System},
+  author={Pan, Yongzhou and Liu, Binhong and Liu, Zhen and Shen, Hao and Xu, Jianyu and Fu, Wenxing and Yang, Tao},
+  journal={Drones},
+  volume={8},
+  number={2},
+  pages={66},
+  year={2024},
+  publisher={Multidisciplinary Digital Publishing Institute}
+}
+
+@inproceedings{pan2022does,
+  title={How Does Monocular Depth Estimation Work for MAV Navigation in the Real World?},
+  author={Pan, Yongzhou and Wang, Jingjing and Chen, Fengnan and Lin, Zheng and Zhang, Siyao and Yang, Tao},
+  booktitle={International Conference on Autonomous Unmanned Systems},
+  pages={3763--3771},
+  year={2022},
+  organization={Springer}
+}
 
 ## Maintainers
 For any technical problems, please raise issues or contact Yongzhou Pan (panyongzhou@mail.nwpu.edu.cn).
